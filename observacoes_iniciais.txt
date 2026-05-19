@@ -1,0 +1,16 @@
+Observações iniciais para o conjunto de testes:
+
+1. Teste com dois casos num único teste
+
+- No teste "deve desativar usuários se eles não forem administradores", ele valida dois cenários diferentes no mesmo teste: usuário comum e admin.
+- Isso torna o teste menos claro e mais difícil de entender quando um dos casos falha.
+
+2. Teste frágil de formatação
+
+- Em "deve gerar um relatório de usuários formatado", a verificação depende de uma string formatada exata (`linhaEsperada`) e de `startsWith`.
+- Essa abordagem quebra com qualquer mudança de layout, mesmo que o comportamento do relatório continue correto.
+
+3. Teste de exceção incompleto
+
+- Em "deve falhar ao criar usuário menor de idade", o `try/catch` não garante que a exceção seja lançada.
+- Se nenhuma exceção ocorrer, o teste pode passar silenciosamente, escondendo um bug.
