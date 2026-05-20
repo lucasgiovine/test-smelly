@@ -28,4 +28,26 @@ Conclusão:
 - A análise manual e o ESLint convergem em dois problemas importantes: uso condicional de `expect` e testes desabilitados.
 - O smell de formatação do relatório permanece uma observação de qualidade de teste que precisa ser tratada manualmente.
 
+Validação final:
 
+Após criação do arquivo com os testes refatorados, os seguintes comandos via terminal foram executados novamente:
+
+- npx eslint __tests__/userService.clean.test.js
+PS C:\Codigos\test-smelly> npx eslint __tests__/userService.clean.test.js
+
+- npm test
+PS C:\Codigos\test-smelly> npm test
+
+> test-smells-lab@1.0.0 test
+> jest
+
+ PASS  __tests__/userService.clean.test.js
+ PASS  test/userService.smelly.test.js
+
+Test Suites: 2 passed, 2 total
+Tests:       1 skipped, 11 passed, 12 total
+Snapshots:   0 total
+Time:        0.622 s, estimated 1 s
+Ran all test suites.
+
+- Após a execução, ambos os testes passaram, e o eslint não destacou nenhum test smell no novo arquivo refatorado.
