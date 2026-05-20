@@ -14,7 +14,7 @@ describe('UserService - Clean Tests', () => {
     userService._clearDB();
   });
 
-  test('should create a user with valid data', () => {
+  test('deve criar um usuário com dados válidos', () => {
     // Arrange
     const { nome, email, idade } = dadosUsuarioPadrao;
 
@@ -29,7 +29,7 @@ describe('UserService - Clean Tests', () => {
     expect(usuarioCriado.status).toBe('ativo');
   });
 
-  test('should return a created user when searched by id', () => {
+  test('deve retornar um usuário criado ao buscar por id', () => {
     // Arrange
     const usuarioCriado = userService.createUser(
       dadosUsuarioPadrao.nome,
@@ -44,7 +44,7 @@ describe('UserService - Clean Tests', () => {
     expect(usuarioBuscado).toEqual(usuarioCriado);
   });
 
-  test('should deactivate a non-admin user', () => {
+  test('deve desativar um usuário que não é administrador', () => {
     // Arrange
     const usuarioComum = userService.createUser('Comum', 'comum@teste.com', 30);
 
@@ -57,7 +57,7 @@ describe('UserService - Clean Tests', () => {
     expect(usuarioAtualizado.status).toBe('inativo');
   });
 
-  test('should not deactivate an admin user', () => {
+  test('não deve desativar um usuário administrador', () => {
     // Arrange
     const usuarioAdmin = userService.createUser('Admin', 'admin@teste.com', 40, true);
 
@@ -70,7 +70,7 @@ describe('UserService - Clean Tests', () => {
     expect(usuarioAtualizado.status).toBe('ativo');
   });
 
-  test('should generate an empty report when there are no users', () => {
+  test('deve gerar relatório vazio quando não há usuários', () => {
     // Act
     const relatorio = userService.generateUserReport();
 
@@ -79,7 +79,7 @@ describe('UserService - Clean Tests', () => {
     expect(relatorio).toContain('Nenhum usuário cadastrado.');
   });
 
-  test('should generate a report containing each user name and status', () => {
+  test('deve gerar relatório com nome e status dos usuários', () => {
     // Arrange
     const usuario1 = userService.createUser('Alice', 'alice@email.com', 28);
     const usuario2 = userService.createUser('Bob', 'bob@email.com', 32);
@@ -97,7 +97,7 @@ describe('UserService - Clean Tests', () => {
     expect(relatorio).toContain(usuario2.status);
   });
 
-  test('should throw when creating an underage user', () => {
+  test('deve lançar erro ao criar usuário menor de idade', () => {
     // Act & Assert
     expect(() => {
       userService.createUser('Menor', 'menor@email.com', 17);
