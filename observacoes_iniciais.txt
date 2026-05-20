@@ -14,3 +14,18 @@ Observações iniciais para o conjunto de testes:
 
 - Em "deve falhar ao criar usuário menor de idade", o `try/catch` não garante que a exceção seja lançada.
 - Se nenhuma exceção ocorrer, o teste pode passar silenciosamente, escondendo um bug.
+
+Após execução da etapa 4.2:
+
+- O ESLint reportou 4 erros e 1 aviso no arquivo `test/userService.smelly.test.js`.
+- Os 4 erros são todos da regra `jest/no-conditional-expect`.
+  - Isso confirma o problema manual identificado no teste `deve desativar usuários se eles não forem administradores`, que usa `expect` de forma condicional dentro de um loop e branching.
+  - Também evidencia o smell do teste `deve falhar ao criar usuário menor de idade`, que usa `expect` dentro de um bloco `catch` sem garantir a exceção.
+- O aviso é da regra `jest/no-disabled-tests`, que corresponde ao `test.skip('deve retornar uma lista vazia quando não há usuários')` presente no arquivo.
+- O ESLint não apontou o smell de formatação frágil do relatório, pois esse problema é de especificação de teste e não cai na regra usada pelo plugin.
+
+Conclusão:
+- A análise manual e o ESLint convergem em dois problemas importantes: uso condicional de `expect` e testes desabilitados.
+- O smell de formatação do relatório permanece uma observação de qualidade de teste que precisa ser tratada manualmente.
+
+
